@@ -30,11 +30,11 @@ class TestPositiveScenarios():
         employees = [el.text for el in employee_locator]
 
         for employee in employees:
-            print(employees)
+            print(employee)
 
-        actual_employees = ['Abigail Peterson', 'Anita Oliver', 'Audrey Peterson', 'Beth Evans', 'Doris Cole',
+        actual_employees = ['Abigail Peterson1', 'Anita Oliver', 'Audrey Peterson', 'Beth Evans', 'Doris Cole',
                             'Eli Lambert', 'Ernest Reed', 'Jeffrey Kelly', 'Jennie Fletcher', 'Keith Byrd',
                             'Marc Demo', 'Mitchell Admin', 'Paul Williams', 'Rachel Perry', 'Randall Lewis', 'Ronnie Hart',
                             'Sharlene Rhodes', 'Tina Williamson', 'Toni Jimenez', 'Walter Horton']
 
-        assert actual_employees == employees
+        assert actual_employees == employees, f"The lists do not match!\nExpected: {actual_employees}\nActual: {employees}"
