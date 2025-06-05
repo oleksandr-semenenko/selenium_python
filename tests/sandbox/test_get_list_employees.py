@@ -1,9 +1,13 @@
 import time
 
+import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 class TestPositiveScenarios():
+
+    @pytest.mark.employee
+    @pytest.mark.positive
     def test_get_list_employee(self):
 
         driver = webdriver.Chrome()
@@ -32,7 +36,7 @@ class TestPositiveScenarios():
         for employee in employees:
             print(employee)
 
-        actual_employees = ['Abigail Peterson1', 'Anita Oliver', 'Audrey Peterson', 'Beth Evans', 'Doris Cole',
+        actual_employees = ['Abigail Peterson', 'Anita Oliver', 'Audrey Peterson', 'Beth Evans', 'Doris Cole',
                             'Eli Lambert', 'Ernest Reed', 'Jeffrey Kelly', 'Jennie Fletcher', 'Keith Byrd',
                             'Marc Demo', 'Mitchell Admin', 'Paul Williams', 'Rachel Perry', 'Randall Lewis', 'Ronnie Hart',
                             'Sharlene Rhodes', 'Tina Williamson', 'Toni Jimenez', 'Walter Horton']
