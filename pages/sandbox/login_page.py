@@ -13,7 +13,7 @@ class LoginPage:
     def __inint__(self, driver: WebDriver):
         self._driver = driver
 
-    def open(self):
+    def open(self, _driver):
         self._driver.get(self.__url)
 
     def execute_login(self, username: str, password: str):

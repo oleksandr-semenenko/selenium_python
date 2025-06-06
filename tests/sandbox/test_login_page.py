@@ -3,15 +3,19 @@ import time
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webdriver import WebDriver
+
+
 
 class TestPositiveScenarios():
 
     @pytest.mark.login
     @pytest.mark.positive
-    def test_positive_login(self):
+    def test_positive_login(self, driver):
 
         driver = webdriver.Chrome()
         time.sleep(3)
+
 
         driver.get("https://semenenko.sandbox.first.institute/web/login")
         time.sleep(5)
@@ -27,4 +31,6 @@ class TestPositiveScenarios():
         time.sleep(5)
 
         actual_url = driver.current_url
-        assert actual_url == "https://semenenko.sandbox.first.institute/odoo/discuss"
+        assert actual_url == "https://semenenko.sandbox.first.institute/odoo/discuss", "URL is not as expected"
+
+        driver.quit()
