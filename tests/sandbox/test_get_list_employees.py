@@ -1,37 +1,27 @@
 import time
 
 import pytest
-from selenium import webdriver
 from selenium.webdriver.common.by import By
+
+from pages.sandbox.login_page import LoginPage
 
 class TestPositiveScenarios():
 
     @pytest.mark.employee
     @pytest.mark.positive
-    def test_get_list_employee(self):
+    def test_get_list_employee(self, driver):
+        login_page = LoginPage(driver)
 
-        driver = webdriver.Chrome()
-        time.sleep(3)
-
-        driver.get("https://semenenko.sandbox.first.institute/web/login")
-        time.sleep(5)
-
-        username_locator = driver.find_element(By.ID, "login")
-        username_locator.send_keys("oleksandr.semenenko@icloud.com")
-
-        password_locator = driver.find_element(By.ID, "password")
-        password_locator.send_keys("AyEzXNKZBEma84e")
-
-        login_button_locator = driver.find_element(By.XPATH, "//button[@class='btn btn-primary']")
-        login_button_locator.click()
-        time.sleep(5)
+        login_page.open()
+        login_page.execute_login("oleksandr.semenenko@icloud.com", "AyEzXNKZBEma84e")
+        time.sleep(2)
 
         driver.get("https://semenenko.sandbox.first.institute/odoo/employees")
-        time.sleep(10)
+        time.sleep(2)
 
         employee_locator = driver.find_elements(By.CSS_SELECTOR, "span.fw-bold.fs-5")
 
-        employees = [el.text for el in employee_locator]
+        employees = [element.text for element in employee_locator]
 
         for employee in employees:
             print(employee)
