@@ -13,7 +13,7 @@ class TestPositiveScenarios():
         login_page = LoginPage(driver)
 
         login_page.open()
-        login_page.login_with_env_credentials()
+        login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
         time.sleep(2)  # I know that is not good solution, but it's not work with implicit wait
 
         assert driver.current_url == "https://semenenko.sandbox.first.institute/odoo/discuss", \
