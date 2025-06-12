@@ -13,7 +13,7 @@ class TestPositiveScenarios():
         login_page = LoginPage(driver)
 
         login_page.open()
-        login_page.execute_login("oleksandr.semenenko@icloud.com", "AyEzXNKZBEma84e")
+        login_page.login_with_env_credentials()
         time.sleep(2)
 
         driver.get("https://semenenko.sandbox.first.institute/odoo/employees")

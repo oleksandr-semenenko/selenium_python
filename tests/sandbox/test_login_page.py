@@ -1,3 +1,4 @@
+import os
 import time
 
 import pytest
@@ -12,7 +13,7 @@ class TestPositiveScenarios():
         login_page = LoginPage(driver)
 
         login_page.open()
-        login_page.execute_login("oleksandr.semenenko@icloud.com", "AyEzXNKZBEma84e")
+        login_page.login_with_env_credentials()
         time.sleep(2)  # I know that is not good solution, but it's not work with implicit wait
 
         assert driver.current_url == "https://semenenko.sandbox.first.institute/odoo/discuss", \
