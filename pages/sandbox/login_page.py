@@ -20,7 +20,8 @@ class LoginPage:
         self._driver.get(self.__url)
 
     def execute_login(self, username: str, password: str):
-
-        self._wait.until(EC.presence_of_element_located(self.__username_field)).send_keys(username)
+        self._wait.until(
+            EC.presence_of_element_located(self.__username_field)
+        ).send_keys(username)
         self._driver.find_element(*self.__password_field).send_keys(password)
         self._driver.find_element(*self.__login_button).click()

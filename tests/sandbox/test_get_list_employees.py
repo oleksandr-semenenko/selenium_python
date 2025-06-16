@@ -1,13 +1,14 @@
 import os
-import time
 
 import pytest
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.expected_conditions import *
+from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.sandbox.login_page import LoginPage
 
-class TestPositiveScenarios():
 
+class TestPositiveScenarios:
     @pytest.mark.employee
     @pytest.mark.positive
     def test_get_list_employee(self, driver):
@@ -15,10 +16,11 @@ class TestPositiveScenarios():
 
         login_page.open()
         login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
-        time.sleep(2)
+        WebDriverWait(driver, 10.0).until(
+            url_to_be("https://semenenko.sandbox.first.institute/odoo/discuss")
+        )
 
         driver.get("https://semenenko.sandbox.first.institute/odoo/employees")
-        time.sleep(2)
 
         employee_locator = driver.find_elements(By.CSS_SELECTOR, "span.fw-bold.fs-5")
 
@@ -27,9 +29,29 @@ class TestPositiveScenarios():
         for employee in employees:
             print(employee)
 
-        actual_employees = ['Abigail Peterson', 'Anita Oliver', 'Audrey Peterson', 'Beth Evans', 'Doris Cole',
-                            'Eli Lambert', 'Ernest Reed', 'Jeffrey Kelly', 'Jennie Fletcher', 'Keith Byrd',
-                            'Marc Demo', 'Mitchell Admin', 'Paul Williams', 'Rachel Perry', 'Randall Lewis', 'Ronnie Hart',
-                            'Sharlene Rhodes', 'Tina Williamson', 'Toni Jimenez', 'Walter Horton']
+        actual_employees = [
+            "Abigail Peterson",
+            "Anita Oliver",
+            "Audrey Peterson",
+            "Beth Evans",
+            "Doris Cole",
+            "Eli Lambert",
+            "Ernest Reed",
+            "Jeffrey Kelly",
+            "Jennie Fletcher",
+            "Keith Byrd",
+            "Marc Demo",
+            "Mitchell Admin",
+            "Paul Williams",
+            "Rachel Perry",
+            "Randall Lewis",
+            "Ronnie Hart",
+            "Sharlene Rhodes",
+            "Tina Williamson",
+            "Toni Jimenez",
+            "Walter Horton",
+        ]
 
-        assert actual_employees == employees, f"The lists do not match!\nExpected: {actual_employees}\nActual: {employees}"
+        assert (
+            actual_employees == employees
+        ), f"The lists do not match!\nExpected: {actual_employees}\nActual: {employees}"
