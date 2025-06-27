@@ -1,5 +1,3 @@
-import os
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
@@ -25,3 +23,6 @@ class LoginPage:
         ).send_keys(username)
         self._driver.find_element(*self.__password_field).send_keys(password)
         self._driver.find_element(*self.__login_button).click()
+        self._wait.until(
+            EC.url_to_be("https://semenenko.sandbox.first.institute/odoo/discuss")
+        )

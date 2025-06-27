@@ -1,10 +1,8 @@
 import os
 
 import pytest
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.expected_conditions import *
-from selenium.webdriver.support.wait import WebDriverWait
 
+from pages.sandbox.employee_page import EmployeePage
 from pages.sandbox.login_page import LoginPage
 
 
@@ -13,21 +11,15 @@ class TestPositiveScenarios:
     @pytest.mark.positive
     def test_get_list_employee(self, driver):
         login_page = LoginPage(driver)
+        employee_page = EmployeePage(driver)
 
         login_page.open()
         login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
-        WebDriverWait(driver, 10.0).until(
-            url_to_be("https://semenenko.sandbox.first.institute/odoo/discuss")
-        )
 
-        driver.get("https://semenenko.sandbox.first.institute/odoo/employees")
+        employee_page.open()
+        employees = employee_page.get_list_of_employees()
 
-        employee_locator = driver.find_elements(By.CSS_SELECTOR, "span.fw-bold.fs-5")
-
-        employees = [element.text for element in employee_locator]
-
-        for employee in employees:
-            print(employee)
+        employee_names = [emp.name for emp in employees]
 
         actual_employees = [
             "Abigail Peterson",
@@ -53,5 +45,5 @@ class TestPositiveScenarios:
         ]
 
         assert (
-            actual_employees == employees
+            actual_employees == employee_names
         ), f"The lists do not match!\nExpected: {actual_employees}\nActual: {employees}"
