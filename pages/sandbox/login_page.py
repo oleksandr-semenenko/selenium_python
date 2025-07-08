@@ -3,6 +3,8 @@ import os
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.expected_conditions import any_of
+
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -26,5 +28,11 @@ class LoginPage:
         self._driver.find_element(*self.__password_field).send_keys(password)
         self._driver.find_element(*self.__login_button).click()
         self._wait.until(
-            EC.url_to_be(os.environ["FRONTEND_URL"] + "/odoo/discuss")
+            any_of(
+                EC.url_to_be(os.environ["FRONTEND_URL"] + "/odoo/discuss"),
+                EC.text_to_be_present_in_element(
+                    (By.XPATH, "//p[@class='alert alert-danger']"),
+                " Wrong login/password"
+                )
+            )
         )
