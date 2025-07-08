@@ -16,5 +16,5 @@ class TestPositiveScenarios:
 
         assert (
             driver.current_url
-            == "https://semenenko.sandbox.first.institute/odoo/discuss"
+            == os.environ["FRONTEND_URL"] + "/odoo/discuss"
         ), "URL is not as expected"
