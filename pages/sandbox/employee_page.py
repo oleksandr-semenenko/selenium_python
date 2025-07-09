@@ -1,3 +1,4 @@
+import os
 from dataclasses import dataclass, field
 from typing import List
 
@@ -13,7 +14,7 @@ class Employee:
 
 
 class EmployeePage:
-    __url = "https://semenenko.sandbox.first.institute/odoo/employees"
+    __url = os.environ["FRONTEND_URL"] + "/odoo/employees"
     __employee_locator = (By.CSS_SELECTOR, "span.fw-bold.fs-5")
 
     def __init__(self, driver: WebDriver):
