@@ -15,6 +15,5 @@ class TestPositiveScenarios:
         login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
 
         assert (
-            driver.current_url
-            == os.environ["FRONTEND_URL"] + "/odoo/discuss"
+            driver.current_url == os.environ["FRONTEND_URL"] + "/odoo/discuss"
         ), "URL is not as expected"

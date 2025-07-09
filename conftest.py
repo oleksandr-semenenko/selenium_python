@@ -23,13 +23,9 @@ from webdriver_factory import get_driver
 #     disable_autowait()
 
 
-
-
-
-
 @pytest.fixture()
 def driver():
     driver = webdriver.Chrome()
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(1)
     yield driver
     driver.quit()

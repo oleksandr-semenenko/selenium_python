@@ -11,6 +11,7 @@ class Employee:
     name: str
     job_title: str = field(default="")
 
+
 class EmployeePage:
     __url = "https://semenenko.sandbox.first.institute/odoo/employees"
     __employee_locator = (By.CSS_SELECTOR, "span.fw-bold.fs-5")

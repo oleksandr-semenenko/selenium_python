@@ -32,7 +32,7 @@ class LoginPage:
                 EC.url_to_be(os.environ["FRONTEND_URL"] + "/odoo/discuss"),
                 EC.text_to_be_present_in_element(
                     (By.XPATH, "//p[@class='alert alert-danger']"),
-                " Wrong login/password"
-                )
+                    " Wrong login/password",
+                ),
             )
         )
