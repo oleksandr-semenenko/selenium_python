@@ -9,7 +9,7 @@ from pages.sandbox.login_page import LoginPage
 class TestPositiveScenarios:
     @pytest.mark.employee
     @pytest.mark.positive
-    def test_get_list_employee(self, driver):
+    def test_get_list_employees(self, driver):
         login_page = LoginPage(driver)
         employee_page = EmployeePage(driver)
 

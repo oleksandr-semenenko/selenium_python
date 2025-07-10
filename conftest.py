@@ -3,6 +3,7 @@ from typing import Generator
 import pytest
 from selenium.webdriver.remote import webdriver
 from selenium import webdriver
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from utils.autowait import enable_autowait, disable_autowait
 from webdriver_factory import get_driver
@@ -14,6 +15,13 @@ from webdriver_factory import get_driver
 #     drv = get_driver()
 #     yield drv
 #     drv.quit()
+
+@pytest.fixture()
+def driver():
+    driver = webdriver.Chrome()
+    driver.implicitly_wait(1)
+    yield driver
+    driver.quit()
 #
 #
 # @pytest.fixture
@@ -23,9 +31,4 @@ from webdriver_factory import get_driver
 #     disable_autowait()
 
 
-@pytest.fixture()
-def driver():
-    driver = webdriver.Chrome()
-    driver.implicitly_wait(1)
-    yield driver
-    driver.quit()
+
