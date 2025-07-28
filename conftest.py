@@ -16,6 +16,7 @@ from webdriver_factory import get_driver
 #     yield drv
 #     drv.quit()
 
+# My block of code
 @pytest.fixture()
 def driver():
     driver = webdriver.Chrome()

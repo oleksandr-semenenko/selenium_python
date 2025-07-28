@@ -13,6 +13,7 @@ class LoginPage:
     __username_field = (By.ID, "login")
     __password_field = (By.ID, "password")
     __login_button = (By.XPATH, "//button[@class='btn btn-primary']")
+    __error_message_locator = (By.XPATH, "//p[@class='alert alert-danger']") # add this locator for error
 
     def __init__(self, driver: WebDriver):
         self._driver = driver
@@ -31,7 +32,7 @@ class LoginPage:
             any_of(
                 EC.url_to_be(os.environ["FRONTEND_URL"] + "/odoo/discuss"),
                 EC.text_to_be_present_in_element(
-                    (By.XPATH, "//p[@class='alert alert-danger']"),
+                    self.__error_message_locator,
                     " Wrong login/password",
                 ),
             )
