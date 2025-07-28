@@ -1,6 +1,4 @@
 import os
-from calendar import error
-from importlib.metadata import pass_none
 
 import pytest
 
