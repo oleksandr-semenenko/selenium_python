@@ -14,4 +14,4 @@ class TestNegativeScenarios:
         login_page.open()
         login_page.execute_login(os.environ["LOGIN_NEGATIVE"], os.environ["PASSWORD_NEGATIVE"])
 
-
+        assert login_page.is_login_error_displayed()

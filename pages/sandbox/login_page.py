@@ -33,7 +33,15 @@ class LoginPage:
                 EC.url_to_be(os.environ["FRONTEND_URL"] + "/odoo/discuss"),
                 EC.text_to_be_present_in_element(
                     self.__error_message_locator,
-                    " Wrong login/password",
+                    "Wrong login/password",
                 ),
+            )
+        )
+
+    def is_login_error_displayed(self) -> bool:
+        return self._wait.until(
+            EC.text_to_be_present_in_element(
+                self.__error_message_locator,
+                "Wrong login/password",
             )
         )

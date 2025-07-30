@@ -22,11 +22,3 @@ class TestPositiveScenarios:
         employees_page.click()
 
         assert employee_profile_page.is_employee_name_displayed()
-
-
-
-
-# 1. Login to the application
-# 2. Go to the page Employee
-# 3. Go to the Employee details page
-# 4. Check the element is present "Work email"
