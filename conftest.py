@@ -9,20 +9,21 @@ from utils.autowait import enable_autowait, disable_autowait
 from webdriver_factory import get_driver
 
 
-# @pytest.fixture(scope="module")
-# def driver() -> Generator[WebDriver, None, None]:
-#     """Returns initialized WedDriver instance."""
-#     drv = get_driver()
-#     yield drv
-#     drv.quit()
+@pytest.fixture(scope="module")
+def driver() -> Generator[WebDriver, None, None]:
+    """Returns initialized WedDriver instance."""
+    drv = get_driver()
+    drv.implicitly_wait(1)
+    yield drv
+    drv.quit()
 
 # My block of code
-@pytest.fixture()
-def driver():
-    driver = webdriver.Chrome()
-    driver.implicitly_wait(1)
-    yield driver
-    driver.quit()
+# @pytest.fixture()
+# def driver():
+#     driver = webdriver.Chrome()
+#     driver.implicitly_wait(1)
+#     yield driver
+#     driver.quit()
 #
 #
 # @pytest.fixture
@@ -30,6 +31,3 @@ def driver():
 #     enable_autowait()
 #     yield
 #     disable_autowait()
-
-
-
