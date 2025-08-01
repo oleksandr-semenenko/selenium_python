@@ -1,23 +1,26 @@
 import os
-from dataclasses import dataclass, field
-from typing import List
+from dataclasses import dataclass
+from typing import Callable, Union, Literal
 
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support.expected_conditions import WebDriverOrWebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
 
 @dataclass
-class Employees:
+class Employee:
     name: str
     job_title: str
+    email: str
+    phone: str
 
 
 class EmployeesPage:
     __url = os.environ["FRONTEND_URL"] + "/odoo/employees"
-    __employee_locator = (By.CSS_SELECTOR, "span.fw-bold.fs-5")
-    __job_title_locator = (By.XPATH, "//span[not(@class)]")
+    __employees_card_locator = By.TAG_NAME, "article"
 
     def __init__(self, driver: WebDriver):
         self._driver = driver
@@ -27,7 +30,7 @@ class EmployeesPage:
         self._driver.get(self.__url)
 
     def click(self):
-        element = self._wait.until(EC.element_to_be_clickable(self.__employee_locator))
+        element = self._wait.until(EC.element_to_be_clickable(self.__employees_card_locator))
         element.click()
 
     # def click(self):
@@ -42,15 +45,18 @@ class EmployeesPage:
     #----------
 
     # New block of code
-    def get_list_of_employees(self) -> List[Employees]:
-        name_elements = self._driver.find_elements(*self.__employee_locator)
-        job_title_elements = self._driver.find_elements(*self.__job_title_locator)
+    def get_list_of_employees(self) -> list[Employee]:
+        employees: list[Employee] = []
 
+        # Look for all <article> tags — they are Employee card.
+        for el in self._driver.find_elements(*self.__employees_card_locator):
+            # Looking for each element one by one.
+            # See ./pages/sandbox/employee_card.html for example.
+            name = el.find_element(By.TAG_NAME, "span").text.strip()            # Name is the first <span>
+            job = el.find_element(By.CSS_SELECTOR, "main > span").text.strip()  # 1st <span> in <main>
+            email = el.find_element(By.XPATH, "(//main/div)[2]").text.strip()   # 2nd <div> in <main>
+            phone = el.find_element(By.XPATH, "(//main/div)[3]").text.strip()   # 3rd <div> in <main>
 
-        #assert len(name_elements) == len(job_title_elements), "Mismatch between names and job titles"
+            employees.append(Employee(name=name, job_title=job, email=email, phone=phone))
 
-        employees = [
-            Employees(name=name.text, job_title=job.text)
-            for name, job in zip(name_elements, job_title_elements)
-        ]
         return employees
