@@ -33,18 +33,6 @@ class EmployeesPage:
         element = self._wait.until(EC.element_to_be_clickable(self.__employees_card_locator))
         element.click()
 
-    # def click(self):
-    #     self._driver.click(self.__employee_locator)
-
-
-
-    # Previous code
-    # def get_list_of_employees(self) -> List[Employee]:
-    #     elements = self._driver.find_elements(*self.__employee_locator)
-    #     return [Employee(name=el.text) for el in elements if el.text]
-    #----------
-
-    # New block of code
     def get_list_of_employees(self) -> list[Employee]:
         employees: list[Employee] = []
 

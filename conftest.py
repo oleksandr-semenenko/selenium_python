@@ -1,11 +1,8 @@
 from typing import Generator
 
 import pytest
-from selenium.webdriver.remote import webdriver
-from selenium import webdriver
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from utils.autowait import enable_autowait, disable_autowait
 from webdriver_factory import get_driver
 
 
