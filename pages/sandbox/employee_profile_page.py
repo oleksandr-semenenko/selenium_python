@@ -20,9 +20,6 @@ class EmployeeProfilePage:
     def open(self):
         self._driver.get(self.__url)
 
-    # def clear(self):
-    #     element = self._wait.until(EC.element_to_be_clickable(self.__employee_job_title_input))
-    #     element.clear()
 
     def set_job_title(self, title: str):
         element = self._driver.find_element(*self.__employee_job_title_input)
@@ -50,3 +47,5 @@ class EmployeeProfilePage:
 
     def generate_random_job_title(self, prefix: str = "Consultant") -> str:
         return f"{prefix}{random.randint(1, 1000)}"
+
+
