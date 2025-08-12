@@ -22,8 +22,10 @@ class TestPositiveScenarios:
         employee_page.open()
         employee_page.click()
 
-        employee_profile_page.set_job_title("Consultant")
+        random_title = employee_profile_page.generate_random_job_title()
+        employee_profile_page.set_job_title(random_title)
+        time.sleep(5)
         employee_profile_page.click_save()
 
         assert employee_profile_page.is_employee_job_title_displayed()
-        assert employee_profile_page.get_job_title() == "Consultant"
+        assert employee_profile_page.get_job_title() == random_title

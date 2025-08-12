@@ -1,4 +1,5 @@
 import os
+import random
 
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -46,3 +47,6 @@ class EmployeeProfilePage:
             return True
         except:
             return False
+
+    def generate_random_job_title(self, prefix: str = "Consultant") -> str:
+        return f"{prefix}{random.randint(1, 1000)}"
