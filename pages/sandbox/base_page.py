@@ -1,8 +1,6 @@
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 
-from conftest import driver
-
 
 class BasePage:
     def __init__(self, driver: WebDriver):

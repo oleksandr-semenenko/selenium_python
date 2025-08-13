@@ -11,6 +11,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 class Employee:
     name: str
 
+
 class EmployeesPage:
     __url = os.environ["FRONTEND_URL"] + "/odoo/employees"
     __employees_card_locator = By.TAG_NAME, "article"
@@ -33,7 +34,7 @@ class EmployeesPage:
         for el in self._driver.find_elements(*self.__employees_card_locator):
             # Looking for each element one by one.
             # See ./pages/sandbox/employee_card.html for example.
-            name = el.find_element(By.TAG_NAME, "span").text.strip()            # Name is the first <span>
+            name = el.find_element(By.TAG_NAME, "span").text.strip()  # Name is the first <span>
 
             employees.append(Employee(name=name))
 
