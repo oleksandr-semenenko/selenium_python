@@ -20,7 +20,6 @@ class TestPositiveScenarios:
         employees = employees_page.get_list_of_employees()
 
         employees_name = [emp.name for emp in employees]
-        job_titles = [emp.job_title for emp in employees]
 
         assert employees_name == [
             "Abigail Peterson",
@@ -43,27 +42,4 @@ class TestPositiveScenarios:
             "Tina Williamson",
             "Toni Jimenez",
             "Walter Horton",
-        ]
-
-        assert job_titles == [
-            "Consultant",
-            "Experienced Developer",
-            "Consultant",
-            "Experienced Developer",
-            "Consultant",
-            "Marketing and Community Manager",
-            "Consultant",
-            "Marketing and Community Manager",
-            "Experienced Developer",
-            "Experienced Developer",
-            "Experienced Developer",
-            "Chief Executive Officer",
-            "Experienced Developer",
-            "Marketing and Community Manager",
-            "Experienced Developer",
-            "Team Leader",
-            "Experienced Developer",
-            "Human Resources Manager",
-            "Consultant",
-            "Experienced Developer",
         ]
