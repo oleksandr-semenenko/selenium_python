@@ -12,7 +12,7 @@ class Employee:
     name: str
 
 
-class EmployeesPage:
+class EmployeesList:
     __url = os.environ["FRONTEND_URL"] + "/odoo/employees"
     __employees_card_locator = By.TAG_NAME, "article"
 

@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from pages.sandbox.employees_page import EmployeesPage
+from pages.sandbox.employees_page import EmployeesList
 from pages.sandbox.login_page import LoginPage
 
 
@@ -11,7 +11,7 @@ class TestPositiveScenarios:
     @pytest.mark.positive
     def test_get_list_employees(self, driver):
         login_page = LoginPage(driver)
-        employees_page = EmployeesPage(driver)
+        employees_page = EmployeesList(driver)
 
         login_page.open()
         login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
