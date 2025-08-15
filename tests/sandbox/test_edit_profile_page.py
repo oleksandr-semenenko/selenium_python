@@ -10,13 +10,13 @@ from pages.sandbox.login_page import LoginPage
 class TestPositiveScenarios:
     @pytest.mark.employee
     @pytest.mark.positive
-    def test_edit_profile_page(self, driver):
+    def test_edit_profile_page(self, driver, signed_in_user):
         login_page = LoginPage(driver)
         employees_page = EmployeesList(driver)
         employee_profile_page = EmployeeProfilePage(driver)
 
-        login_page.open()
-        login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
+        # login_page.open()
+        # login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
 
         employees_page.open()
         employees_page.click()
