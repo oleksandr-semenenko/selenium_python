@@ -11,7 +11,7 @@ class TestPositiveScenarios:
     @pytest.mark.employee
     @pytest.mark.positive
     def test_edit_profile_page(self, driver, signed_in_user):
-        login_page = LoginPage(driver)
+        #login_page = LoginPage(driver)
         employees_page = EmployeesList(driver)
         employee_profile_page = EmployeeProfilePage(driver)
 
