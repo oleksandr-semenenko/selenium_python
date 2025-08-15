@@ -1,10 +1,7 @@
-import os
-
 import pytest
 
 from pages.sandbox.employee_profile_page import EmployeeProfilePage
 from pages.sandbox.employees_page import EmployeesList
-from pages.sandbox.login_page import LoginPage
 
 
 class TestPositiveScenarios:
