@@ -10,9 +10,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 @dataclass
 class Employee:
     name: str
-    job_title: str
-    email: str
-    phone: str
 
 
 class EmployeesPage:
@@ -37,11 +34,8 @@ class EmployeesPage:
         for el in self._driver.find_elements(*self.__employees_card_locator):
             # Looking for each element one by one.
             # See ./pages/sandbox/employee_card.html for example.
-            name = el.find_element(By.TAG_NAME, "span").text.strip()            # Name is the first <span>
-            job = el.find_element(By.CSS_SELECTOR, "main > span").text.strip()  # 1st <span> in <main>
-            email = el.find_element(By.XPATH, "(//main/div)[2]").text.strip()   # 2nd <div> in <main>
-            phone = el.find_element(By.XPATH, "(//main/div)[3]").text.strip()   # 3rd <div> in <main>
+            name = el.find_element(By.TAG_NAME, "span").text.strip()  # Name is the first <span>
 
-            employees.append(Employee(name=name, job_title=job, email=email, phone=phone))
+            employees.append(Employee(name=name))
 
         return employees

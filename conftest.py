@@ -1,4 +1,4 @@
-from typing import Generator
+from collections.abc import Generator
 
 import pytest
 from selenium.webdriver.remote.webdriver import WebDriver
@@ -13,6 +13,7 @@ def driver() -> Generator[WebDriver, None, None]:
     drv.implicitly_wait(1)
     yield drv
     drv.quit()
+
 
 # My block of code
 # @pytest.fixture()

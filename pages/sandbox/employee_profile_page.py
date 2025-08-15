@@ -1,9 +1,9 @@
 import os
 import random
 
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -20,7 +20,6 @@ class EmployeeProfilePage:
     def open(self):
         self._driver.get(self.__url)
 
-
     def set_job_title(self, title: str):
         element = self._driver.find_element(*self.__employee_job_title_input)
         element.clear()
@@ -29,13 +28,14 @@ class EmployeeProfilePage:
     def click_save(self):
         self._wait.until(EC.presence_of_element_located(self.__upload_button)).click()
 
-
     def is_employee_name_displayed(self) -> bool:
         element = self._wait.until(EC.presence_of_element_located(self.__employee_name_locator))
         return element is not None
 
     def get_job_title(self) -> str:
-        element = self._wait.until(EC.visibility_of_element_located(self.__employee_job_title_input))
+        element = self._wait.until(
+            EC.visibility_of_element_located(self.__employee_job_title_input)
+        )
         return element.get_attribute("value")
 
     def is_employee_job_title_displayed(self) -> bool:
@@ -47,5 +47,3 @@ class EmployeeProfilePage:
 
     def generate_random_job_title(self, prefix: str = "Consultant") -> str:
         return f"{prefix}{random.randint(1, 1000)}"
-
-

@@ -42,9 +42,7 @@ class SearchPage(BasePage):
         for product_div_tag in products_tags:
             name: str = product_div_tag.find_element(By.TAG_NAME, "h4").text
             price_text: str = product_div_tag.find_element(By.CLASS_NAME, "price").text
-            product = ProductInfo(
-                name=name, price=Decimal(extract_decimal_prices(price_text)[0])
-            )
+            product = ProductInfo(name=name, price=Decimal(extract_decimal_prices(price_text)[0]))
             products.append(product)
 
         return products

@@ -2,15 +2,12 @@ import os
 from typing import TypedDict
 
 from retrying import retry
-
 from selenium import webdriver
-from selenium.webdriver.remote.webdriver import WebDriver
-from urllib3.exceptions import NewConnectionError
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
-from selenium.webdriver.safari.service import Service as SafariService
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.remote.webdriver import WebDriver
+from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
 

@@ -1,0 +1,41 @@
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_configs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+ignore_missing_imports = true
+disallow_untyped_defs = true
+disallow_untyped_calls = false
+strict_optional = true
+files = ["src", "tests"]
+
+[tool.pytest.ini_options]
+# Папка з тестами
+testpaths = ["tests"]
+
+# Маркери для групування тестів
+markers = [
+    "positive: позитивні сценарії",
+    "negative: негативні сценарії",
+    "smoke: швидка перевірка основного функціоналу",
+]
+
+# Мінімальний рівень логів
+log_cli = true
+log_cli_level = "INFO"

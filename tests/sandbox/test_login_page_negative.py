@@ -1,5 +1,3 @@
-import os
-
 import pytest
 
 from pages.sandbox.login_page import LoginPage
