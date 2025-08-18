@@ -1,7 +1,6 @@
 import os
 
 import pytest
-from selenium.webdriver.common.by import By
 
 from conftest import driver
 from pages.sandbox.login_page import LoginPage
