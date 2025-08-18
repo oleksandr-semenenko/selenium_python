@@ -7,7 +7,7 @@ from pages.sandbox.employees_page import EmployeesList
 class TestPositiveScenarios:
     @pytest.mark.employee
     @pytest.mark.positive
-    def test_edit_profile_page(self, driver, signed_in_user):
+    def test_edit_profile_page(self, driver, signed_as_admin):
         #login_page = LoginPage(driver)
         employees_page = EmployeesList(driver)
         employee_profile_page = EmployeeProfilePage(driver)
