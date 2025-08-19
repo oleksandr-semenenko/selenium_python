@@ -13,19 +13,3 @@ def driver() -> Generator[WebDriver, None, None]:
     drv.implicitly_wait(1)
     yield drv
     drv.quit()
-
-
-# My block of code
-# @pytest.fixture()
-# def driver():
-#     driver = webdriver.Chrome()
-#     driver.implicitly_wait(1)
-#     yield driver
-#     driver.quit()
-#
-#
-# @pytest.fixture
-# def autowait() -> Generator[None, None, None]:
-#     enable_autowait()
-#     yield
-#     disable_autowait()
