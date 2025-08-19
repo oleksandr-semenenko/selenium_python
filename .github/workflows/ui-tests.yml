@@ -15,7 +15,8 @@ jobs:
       headless:
         image: selenium/standalone-chrome:latest
         options: >-
-          --memory=2048m
+          --shm-size="2g"
+#          --memory=2048m
         env:
           CONNECTION_TIMEOUT: "900000" # 15 minutes
         ports:
