@@ -19,7 +19,6 @@ jobs:
         env:
           CONNECTION_TIMEOUT: "900000" # 15 minutes
         ports:
-          # Opens tcp port 6379 on the host and service container
           - 4444:4444
 
     steps:
