@@ -13,13 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     services:
       headless:
-        image: selenium/standalone-chrome:latest
+        image: browserless/chrome:latest
         options: >-
-          --shm-size="2g"
+          --memory=2048m
         env:
           CONNECTION_TIMEOUT: "900000" # 15 minutes
         ports:
-          - 4444:4444
+          # Opens tcp port 6379 on the host and service container
+          - 3000:3000
+
 
     steps:
       # Checkout the repository
