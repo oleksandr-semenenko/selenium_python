@@ -16,6 +16,7 @@ jobs:
         image: selenium/standalone-chrome:latest
         options: >-
           --shm-size="2g"
+#          --memory=2048m
         env:
           CONNECTION_TIMEOUT: "900000" # 15 minutes
         ports:
@@ -31,7 +32,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.12
+          python-version: 3.13
 
       # Install dependencies
       - name: Install dependencies
