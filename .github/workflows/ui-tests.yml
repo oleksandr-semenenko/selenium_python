@@ -42,7 +42,7 @@ jobs:
       - name: Set environment variables
         run: |
           echo "SELENIUM_DRIVER_KIND=remote" >> $GITHUB_ENV
-          echo "REMOTE_DRIVER_URL=http://127.0.0.1:3000" >> $GITHUB_ENV
+          echo "REMOTE_DRIVER_URL=http://localhost:4444" >> $GITHUB_ENV
 
       # Run tests
       - name: Run UI tests
