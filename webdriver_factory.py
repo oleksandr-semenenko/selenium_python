@@ -88,7 +88,7 @@ def get_remote_driver() -> WebDriver:
     options.add_argument("--disable-dev-shm-usage")
 
     driver = webdriver.Remote(
-        command_executor=f'{os.getenv("REMOTE_DRIVER_URL", "http://localhost:4444")}/',
+        command_executor=f'{os.getenv("REMOTE_DRIVER_URL", "http://localhost:4444")}',
         options=options,
     )
 
