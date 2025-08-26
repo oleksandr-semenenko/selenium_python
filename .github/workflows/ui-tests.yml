@@ -48,7 +48,7 @@ jobs:
       - name: Run UI tests
         run: pytest tests --html=test-reports/report.html --self-contained-html -vvv --junitxml=test-reports/report.xml
         env:
-          FRONTEND_URL: ${{ vars.FRONTEND_URL }}
+          FRONTEND_URL: "https://semenenko.sandbox.first.institute"
 
       # Upload test reports
       - name: Upload test reports
