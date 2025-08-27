@@ -43,6 +43,9 @@ jobs:
         run: |
           echo "SELENIUM_DRIVER_KIND=remote" >> $GITHUB_ENV
           echo "REMOTE_DRIVER_URL=http://localhost:4444" >> $GITHUB_ENV
+          echo "FRONTEND_URL=https://semenenko.sandbox.first.institute/" >> $GITHUB_ENV
+          echo "LOGIN=${{secrets.LOGIN}}" >> $GITHUB_ENV
+          echo "PASSWORD=${{secrets.PASSWORD}}" >> $GITHUB_ENV
 
       # Run tests
       - name: Run UI tests
