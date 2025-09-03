@@ -15,6 +15,7 @@ class Employee:
 class EmployeesList:
     __url = os.environ["FRONTEND_URL"] + "/odoo/employees"
     __employees_card_locator = By.TAG_NAME, "article"
+    __employee_name_locator = (By.XPATH, "//label[@for='work_email_0']")
 
     def __init__(self, driver: WebDriver):
         self._driver = driver
@@ -24,8 +25,8 @@ class EmployeesList:
         self._driver.get(self.__url)
 
     def click(self):
-        element = self._wait.until(EC.element_to_be_clickable(self.__employees_card_locator))
-        element.click()
+        self._wait.until(EC.element_to_be_clickable(self.__employees_card_locator)).click()
+        self._wait.until(EC.presence_of_element_located(self.__employee_name_locator))
 
     def get_list_of_employees(self) -> list[Employee]:
         employees: list[Employee] = []
