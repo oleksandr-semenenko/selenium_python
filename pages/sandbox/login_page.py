@@ -8,7 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class LoginPage:
-    __url = os.environ["FRONTEND_URL"] + "/web/login"
+    __url: str = os.environ["FRONTEND_URL"] + "/web/login"
     __username_field = (By.ID, "login")
     __password_field = (By.ID, "password")
     __login_button = (By.XPATH, "//button[@class='btn btn-primary']")
