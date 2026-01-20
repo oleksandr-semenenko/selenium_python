@@ -17,29 +17,15 @@ class LoginPage(BasePage):
     __error_message_locator = (
         By.XPATH,
         "//p[@class='alert alert-danger']",
-    )  # add this locator for error
+    )
 
     def __init__(self, driver: WebDriver):
-        self._driver = driver
+        super().__init__(driver)
         self._wait = WebDriverWait(driver, 10)
 
     def open(self):
         self._driver.get(self.__url)
 
-    # def execute_login(self, username: str, password: str):
-    #     self._wait.until(EC.visibility_of_element_located(self.__username_field)).send_keys(username)
-    #     #self._wait.until(EC.presence_of_element_located(self.__username_field)).send_keys(username)
-    #     self._driver.find_element(*self.__password_field).send_keys(password)
-    #     (self._driver.find_element(*self.__login_button).click())
-    #     self._wait.until(
-    #         any_of(
-    #             EC.url_to_be(os.environ["FRONTEND_URL"] + "/odoo/discuss"),
-    #             EC.text_to_be_present_in_element(
-    #                 self.__error_message_locator,
-    #                 "Wrong login/password",
-    #             ),
-    #         )
-    #     )
 
     def execute_login(self, username: str, password: str) -> None:
         # use BasePage helpers instead of direct find_element
