@@ -20,5 +20,6 @@ class TestPositiveScenarios:
 
         employees_page.open()
         employees_page.click()
+        employee_profile_page.wait_page_is_present()
 
         assert employee_profile_page.is_employee_name_displayed()

@@ -2,6 +2,7 @@ import os
 
 import pytest
 
+from pages.sandbox.discuss_page import DiscussPage
 from pages.sandbox.login_page import LoginPage
 
 
@@ -10,8 +11,11 @@ class TestPositiveScenarios:
     @pytest.mark.positive
     def test_positive_login(self, driver):
         login_page = LoginPage(driver)
+        discuss_page = DiscussPage(driver)
 
         login_page.open()
+        login_page.wait_page_is_present()
         login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
+        discuss_page.wait_page_is_present()
 
-        assert driver.current_url == os.environ["FRONTEND_URL"] + "/odoo/discuss"
+        assert driver.current_url == os.environ["FRONTEND_URL"] + discuss_page.get_relative_url()

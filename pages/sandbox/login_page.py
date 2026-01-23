@@ -10,7 +10,9 @@ from pages.sandbox.base_page import BasePage
 
 
 class LoginPage(BasePage):
-    __url = os.environ["FRONTEND_URL"] + "/web/login"
+    _path = "/web/login"
+    # discuss_page = DiscussPage(driver)
+
     __username_field = (By.ID, "login")
     __password_field = (By.ID, "password")
     __login_button = (By.XPATH, "//button[@class='btn btn-primary']")
@@ -23,9 +25,11 @@ class LoginPage(BasePage):
         super().__init__(driver)
         self._wait = WebDriverWait(driver, 10)
 
-    def open(self):
-        self._driver.get(self.__url)
+    def wait_page_is_present(self) -> None:
+        self._wait.until(EC.element_to_be_clickable(self.__login_button))
 
+    def get_relative_url(self) -> str:
+        return self._path
 
     def execute_login(self, username: str, password: str) -> None:
         # use BasePage helpers instead of direct find_element
@@ -35,6 +39,8 @@ class LoginPage(BasePage):
 
         self._wait.until(
             any_of(
+                # Can I call page Discuss from login_page and do not use /odoo/discuss" like in code below
+                # EC.url_to_be(os.environ["FRONTEND_URL"] + discuss_page.get_relative_url()),
                 EC.url_to_be(os.environ["FRONTEND_URL"] + "/odoo/discuss"),
                 EC.text_to_be_present_in_element(self.__error_message_locator, "Wrong login/password"),
             )

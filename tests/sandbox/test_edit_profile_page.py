@@ -8,12 +8,12 @@ class TestPositiveScenarios:
     @pytest.mark.employee
     @pytest.mark.positive
     def test_edit_profile_page(self, driver, signed_as_admin):
-        #login_page = LoginPage(driver)
         employees_page = EmployeesList(driver)
         employee_profile_page = EmployeeProfilePage(driver)
 
         employees_page.open()
         employees_page.click()
+        employee_profile_page.wait_page_is_present()
 
         random_title = employee_profile_page.generate_random_job_title()
         employee_profile_page.set_job_title(random_title)

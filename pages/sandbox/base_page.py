@@ -1,12 +1,31 @@
+import os
+from abc import abstractmethod, ABC
+
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class BasePage:
+class BasePage(ABC):
+    _path: str
+
     def __init__(self, driver: WebDriver):
         self._driver = driver
+
+    @abstractmethod
+    def wait_page_is_present(self) -> None:
+        pass
+
+    @abstractmethod
+    def get_relative_url(self) -> str:
+        pass
+
+    def open(self) -> None:
+        if not hasattr(self, "_path"):
+            raise NotImplementedError("Page must define _path")
+        base_url = os.environ["FRONTEND_URL"].rstrip("/")
+        self._driver.get(f"{base_url}{self._path}")
 
     def _find(self, locator: tuple) -> WebElement:
         return self._driver.find_element(*locator)
@@ -22,4 +41,3 @@ class BasePage:
     def _wait_until_element_is_visible(self, locator: tuple[str, str], timeout: float = 10.0):
         wait = WebDriverWait(self._driver, timeout)
         wait.until(EC.visibility_of_element_located(locator))
-

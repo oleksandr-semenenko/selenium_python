@@ -18,6 +18,7 @@ class TestPositiveScenarios:
 
         employees_page.open()
         employees = employees_page.get_list_of_employees()
+        employees_page.wait_page_is_present()
 
         employees_name = [emp.name for emp in employees]
 
