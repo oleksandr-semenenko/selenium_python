@@ -11,6 +11,7 @@ class TestPositiveScenarios:
     @pytest.mark.positive
     def test_get_list_employees(self, driver):
         login_page = LoginPage(driver)
+
         employees_page = EmployeesList(driver)
 
         login_page.open()

@@ -10,7 +10,6 @@ class TestNegativeScenarios:
         login_page = LoginPage(driver)
 
         login_page.open()
-        login_page.wait_page_is_present()
         login_page.execute_login("non_existing_user@example.com", "password_of_non_existing_user")
 
         assert login_page.is_login_error_displayed()

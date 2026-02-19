@@ -8,24 +8,28 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePage(ABC):
-    _path: str
+    # _path: str
 
     def __init__(self, driver: WebDriver):
         self._driver = driver
+        self._wait = WebDriverWait(driver, 10)
 
     @abstractmethod
     def wait_page_is_present(self) -> None:
-        pass
+        ...
 
     @abstractmethod
     def get_relative_url(self) -> str:
-        pass
+        ...
 
     def open(self) -> None:
-        if not hasattr(self, "_path"):
-            raise NotImplementedError("Page must define _path")
-        base_url = os.environ["FRONTEND_URL"].rstrip("/")
-        self._driver.get(f"{base_url}{self._path}")
+        base_url = os.environ["FRONTEND_URL"]
+        full_url = f"{base_url}{self.get_relative_url()}"
+        self._driver.get(full_url)
+
+        self.wait_page_is_present()
+        return self
+
 
     def _find(self, locator: tuple) -> WebElement:
         return self._driver.find_element(*locator)

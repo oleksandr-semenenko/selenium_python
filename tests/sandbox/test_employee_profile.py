@@ -12,11 +12,11 @@ class TestPositiveScenarios:
     @pytest.mark.positive
     def test_get_employee_profile(self, driver):
         login_page = LoginPage(driver)
-        employees_page = EmployeesList(driver)
-        employee_profile_page = EmployeeProfilePage(driver)
-
         login_page.open()
         login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
+
+        employees_page = EmployeesList(driver)
+        employee_profile_page = EmployeeProfilePage(driver, employee_id=6).open()
 
         employees_page.open()
         employees_page.click()

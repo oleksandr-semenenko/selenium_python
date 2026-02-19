@@ -14,8 +14,6 @@ class TestPositiveScenarios:
         discuss_page = DiscussPage(driver)
 
         login_page.open()
-        login_page.wait_page_is_present()
         login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
-        discuss_page.wait_page_is_present()
 
         assert driver.current_url == os.environ["FRONTEND_URL"] + discuss_page.get_relative_url()
