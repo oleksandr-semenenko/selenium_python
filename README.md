@@ -1,110 +1,178 @@
-# Selenium + Python Template Project
+# Selenium + Python Test Automation Framework
+This repository contains a Python-based UI test automation framework built with Selenium WebDriver and pytest.
 
-Welcome to the Selenium + Python Template Project! This repository provides a well-structured, scalable framework for test automation using Selenium WebDriver and Python. It's designed to help you get started quickly and maintain your test automation efforts efficiently.
+The framework follows the Page Object Model (POM) design pattern and demonstrates a hybrid QA approach, combining strong manual testing expertise with automation framework development.
 
-## 📋 Features
+---
 
-- **Modular Design**: Organized structure with reusable components like PageObjects and Test Data Factories.
-- **Scalability**: Easy to extend for larger projects.
-- **Integration-Ready**: Built-in support for integrating with APIs, CI/CD pipelines, and reporting tools.
-- **Cross-Browser Support**: Pre-configured WebDriver factory for managing multiple browsers.
-- **Autowaiting**: `WebElement.click()`, `WebElement.send_keys()`, `WebElement.clear()` waits for an element to be enabled/clickable/editable automatically, use `autowait` fixture. Feature inspired by Playwright.
+## 🚀 Key Features
+
+- Modular and scalable project structure
+- Page Object Model (POM) implementation
+- Reusable BasePage abstraction
+- Explicit waits implemented within action methods to reduce flaky tests
+- Test data separation using factory pattern
+- Environment variables for secure configuration
+- Pytest fixtures for reusable setup/teardown
+- CI-ready structure (GitHub Actions compatible)
+- Docker support for isolated execution
+
+---
+
+## 🏗 Architecture Overview
+
+The framework is built using the Page Object Model (POM) design pattern.
+
+Core Design Principles
+- BasePage contains reusable interaction methods:
+  - open()
+  - wait_and_find()
+	- type()
+	- click()
+- Each Page Object inherits from BasePage
+- Explicit waits are implemented inside action methods to improve stability
+- Test data is separated into utils/data_factory.py
+- Pytest fixtures are defined in conftest.py
+- Environment variables are used for credentials and configuration
+- The structure is designed to be CI/CD and Docker ready
+
+This design improves:
+- Maintainability
+- Readability
+- Reusability
+- Test stability
+
+## 🎯 Hybrid QA Focus
+
+This project reflects a Hybrid QA approach, combining:
+- Strong manual testing background
+- Business-level scenario validation
+- Automation framework design
+- Clean separation of UI logic and test logic
+- Technical implementation using Python and Selenium
+
+
+## 🧪 Example Test
+
+```python
+def test_update_job_title(employee_profile_page):
+    employee_profile_page.set_job_title(
+        data_factory.random_job_title()
+    )
+    employee_profile_page.save()
+    employee_profile_page.verify_job_title_updated()
+```
 
 ## 🏗️ Project Structure
 
 ```plaintext
-selenium_python_template/
-├── .github/workflows/ui-tests.yml      # GitHub Workflow
-├── pages/                              # PageObject classes
-├── tests/                              # Test scripts
-├── utils/                              # Utility functions (e.g. text processing)
-├── data/                               # Test data files (coming soon)
-├── test-reports/                       # Test execution reports
-├── drivers/                            # WebDriver binaries (optional)
-├── config/                             # Configuration files (coming soon)
-├── requirements.txt                    # Python dependencies
-├── bitbucket-pipelines.yml             # BitBucket Pipelines configuration
-└── conftest.py                         # Global fixtures
+selenium_python/
+├── .github/workflows/ui-tests.yml   # GitHub Actions workflow
+├── pages/                           # Page Object classes
+├── tests/                           # Test cases
+├── utils/                           # Utility functions (data factory, helpers)
+├── data/                            # Test data files (optional/extendable)
+├── drivers/                         # WebDriver binaries (optional)
+├── config/                          # Configuration files (optional)
+├── test-reports/                    # Test execution reports
+├── requirements.txt                 # Python dependencies
+├── conftest.py                      # Global pytest fixtures
+└── pytest.ini                       # Pytest configuration
 ```
 
-## 🚀 Getting Started
+---
 
-### Prerequisites
+## 🛠 Prerequisites
 
-* Python 3.9+
-* Google Chrome or Firefox or Safari to run & debug tests locally
-* pip (Python package installer)
+- Python 3.9+
+- pip
+- Chrome / Firefox browser
+- WebDriver (chromedriver/geckodriver) available in PATH
 
-### Installation
+---
 
-Download the Selenium Python Template project from releases page: [https://github.
-com/obrizan/selenium_python_template/releases/](https://github.com/obrizan/selenium_python_template/releases/).
+## 📦 Installation
 
-Create and activate virtual environment (optional, but recommended):
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/oleksandr-semenenko/selenium_python.git
+    cd selenium_python
+
+    ```
+
+2. Create and activate a virtual environment:
+
+    ```bash
+    python -m venv venv
+    source venv/bin/activate   # macOS/Linux
+    venv\Scripts\activate      # Windows
+    ```
+
+3. Install dependencies:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+---
+
+## ▶️ Running Tests
+
+### 💡 Run all tests:
 
 ```bash
-python -m venv .venv
-
-# On Windows:
-.venv\Scripts\activate
-
-# On macOS/Linux:
-source .venv/bin/activate
+pytest -v
 ```
 
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Set up WebDriver (optionally):
-
-Download the appropriate WebDriver for your browser (ChromeDriver, GeckoDriver, etc.)
-Place it in the drivers/ directory or update your system PATH.
-
-## ⚙️Configuration
-
-Set environment variables. Pay attention to `FRONTEND_URL` — it doesn't have any default value, it must be set 
-before running tests.
-
-| Variable             | Description                                                             | Default                |
-|----------------------|-------------------------------------------------------------------------|------------------------|
-| `FRONTEND_URL` | Base URL for web application under test.                                |                        |
-| `SELENIUM_DRIVER_KIND` | Options: `remote`, `chrome`, `safari`, `firefox`.                       | `chrome`               |
-| `REMOTE_DRIVER_URL` | Used when `SELENIUM_DRIVER_KIND=remote`.                                | `http://localhost:3000` |
-| `WINDOW_RESOLUTION` | Browser window resolution. Values are defined in `webdriver_factory.py` | `DESKTOP_1280X720`     |
-
-## 🧪 Running Tests
-Run all tests using pytest:
-
-```bash
-pytest --html=test-reports/report.html --self-contained-html
-```
-
-Specify a particular test file or function:
+### 📌 Run a specific test file:
 
 ```bash
 pytest tests/test_example.py
 ```
 
-## 🛠️ Customization
+### Run tests with marker:
+```bash
+pytest -m regression -v
+```
 
-* **Adding Pages:** Create new classes in pages/ to represent additional pages or components.
-* **Adding Tests:** Write test scripts in tests/ and use the pytest framework for execution.
-* **Configuration:** Update config/ files to customize browser, test data paths, and other settings.
+## ⚙️ Environment Configuration
+
+The framework supports environment variables.
+Example (macOS/Linux):
+```bash
+export BASE_URL=https://example.com
+export LOGIN=user
+export PASSWORD=secret
+```
+
+Example (Windows PowerShell):
+
+```powershell
+setx BASE_URL "https://example.com"
+```
+
+## 🚀 CI Integration
+
+The project is compatible with:
+- GitHub Actions
+- Bitbucket Pipelines
+- Docker-based execution
+
+The workflow file is located in:
+```bash
+    .github/workflows/
+```
+
+## 🧠 Future Improvements
+
+- Integration with Allure reporting
+- API automation layer (requests + pytest)
+- Parallel test execution
+- Test environment configuration management
 
 ## 📄 License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## 🙌 Contributing
 Contributions are welcome! If you'd like to improve this project, feel free to fork the repository and submit a pull request.
-
-## 📞 Contact
-Have questions or suggestions? Reach out:
-
-**Author:** Volodymyr Obrizan
-
-**Email:** volodymyr.obrizan@gmail.com
-
-Happy Testing! 🚀
