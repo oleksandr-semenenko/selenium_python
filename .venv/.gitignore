@@ -1,0 +1,18 @@
+# Secrets for tests
+test.env
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.pfx
+*.crt
+secrets.*
+auth.json
+__pycache__/
+*.py[cod]
+venv/
+.idea
+test-reports/
+__pycache__
+.DS_Store
