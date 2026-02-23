@@ -1,3 +1,5 @@
+⭐ This project is featured on my LinkedIn profile
+
 # Selenium + Python Test Automation Framework
 This repository contains a Python-based UI test automation framework built with Selenium WebDriver and pytest.
 
