@@ -10,8 +10,6 @@ test.env
 secrets.*
 auth.json
 __pycache__/
-*.py[cod]
-venv/
 .idea
 test-reports/
 __pycache__
