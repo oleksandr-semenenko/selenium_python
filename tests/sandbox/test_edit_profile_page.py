@@ -10,7 +10,8 @@ class TestPositiveScenarios:
     @pytest.mark.positive
     def test_edit_profile_page(self, driver, signed_as_admin):
         employees_page = EmployeesList(driver)
-        employee_profile_page = EmployeeProfilePage(driver, employee_id=6).open()
+        employee_profile_page = EmployeeProfilePage(driver, employee_id=6)
+        employee_profile_page.open()
 
         employees_page.open()
         employees_page.click()

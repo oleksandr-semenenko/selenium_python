@@ -16,7 +16,8 @@ class TestPositiveScenarios:
         login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
 
         employees_page = EmployeesList(driver)
-        employee_profile_page = EmployeeProfilePage(driver, employee_id=6).open()
+        employee_profile_page = EmployeeProfilePage(driver, employee_id=6)
+        employee_profile_page.open()
 
         employees_page.open()
         employees_page.click()

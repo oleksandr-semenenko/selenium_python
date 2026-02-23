@@ -28,7 +28,6 @@ class BasePage(ABC):
         self._driver.get(full_url)
 
         self.wait_page_is_present()
-        return self
 
 
     def _find(self, locator: tuple) -> WebElement:
