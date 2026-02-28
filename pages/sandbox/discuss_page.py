@@ -8,7 +8,6 @@ from pages.base_page import BasePage
 
 
 class DiscussPage(BasePage):
-
     __discuss_locator = (By.XPATH, "//a[@data-menu-xmlid='mail.menu_root_discuss']")
 
     def __init__(self, driver: WebDriver):

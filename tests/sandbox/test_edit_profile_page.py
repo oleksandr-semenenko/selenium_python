@@ -2,6 +2,7 @@ import pytest
 
 from pages.sandbox.employee_profile_page import EmployeeProfilePage
 from pages.sandbox.employees_page import EmployeesList
+
 # from utils import data_factory
 from utils.data_factory import generate_random_job_title
 

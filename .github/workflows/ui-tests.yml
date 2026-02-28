@@ -48,6 +48,7 @@ jobs:
           echo "FRONTEND_URL=https://semenenko.sandbox.first.institute/" >> $GITHUB_ENV
           echo "LOGIN=${{secrets.LOGIN}}" >> $GITHUB_ENV
           echo "PASSWORD=${{secrets.PASSWORD}}" >> $GITHUB_ENV
+          echo "TESTINEL_DSN=${{secrets.TESTINEL_DSN}}" >> $GITHUB_ENV
 
       # Run tests
       - name: Run UI tests

@@ -14,7 +14,6 @@ class Employee:
 
 
 class EmployeesList(BasePage):
-
     __employees_card_locator = By.TAG_NAME, "article"
     __employee_name_locator = (By.XPATH, "//label[@for='work_email_0']")
 

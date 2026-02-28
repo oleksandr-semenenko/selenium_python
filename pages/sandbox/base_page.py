@@ -15,12 +15,10 @@ class BasePage(ABC):
         self._wait = WebDriverWait(driver, 10)
 
     @abstractmethod
-    def wait_page_is_present(self) -> None:
-        ...
+    def wait_page_is_present(self) -> None: ...
 
     @abstractmethod
-    def get_relative_url(self) -> str:
-        ...
+    def get_relative_url(self) -> str: ...
 
     def open(self) -> None:
         base_url = os.environ["FRONTEND_URL"]
@@ -28,7 +26,6 @@ class BasePage(ABC):
         self._driver.get(full_url)
 
         self.wait_page_is_present()
-
 
     def _find(self, locator: tuple) -> WebElement:
         return self._driver.find_element(*locator)

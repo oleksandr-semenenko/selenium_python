@@ -15,7 +15,6 @@ class EmployeeProfilePage(BasePage):
     __employee_job_title_input = (By.ID, "job_title_0")
     __upload_button = (By.CSS_SELECTOR, "i.fa-cloud-upload")
 
-
     def __init__(self, driver: WebDriver, employee_id: int):
         super().__init__(driver)
         self._employee_id = employee_id
@@ -26,11 +25,8 @@ class EmployeeProfilePage(BasePage):
     def get_relative_url(self) -> str:
         return f"/odoo/employees/{self._employee_id}"
 
-
     def set_job_title(self, title: str) -> None:
-        element = self._wait.until(
-            EC.element_to_be_clickable(self.__employee_job_title_input)
-        )
+        element = self._wait.until(EC.element_to_be_clickable(self.__employee_job_title_input))
         element.clear()
         element.send_keys(title)
 
