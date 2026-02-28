@@ -55,6 +55,7 @@ jobs:
         env:
           FRONTEND_URL: "https://semenenko.sandbox.first.institute"
 
+
       # Upload test reports
       - name: Upload test reports
         uses: actions/upload-artifact@v4

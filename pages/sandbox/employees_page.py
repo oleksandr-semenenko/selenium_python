@@ -1,4 +1,3 @@
-import os
 from dataclasses import dataclass
 
 from selenium.webdriver.common.by import By
@@ -6,23 +5,28 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+from pages.sandbox.base_page import BasePage
+
 
 @dataclass
 class Employee:
     name: str
 
 
-class EmployeesList:
-    __url = os.environ["FRONTEND_URL"] + "/odoo/employees"
+class EmployeesList(BasePage):
+
     __employees_card_locator = By.TAG_NAME, "article"
     __employee_name_locator = (By.XPATH, "//label[@for='work_email_0']")
 
     def __init__(self, driver: WebDriver):
-        self._driver = driver
+        super().__init__(driver)
         self._wait = WebDriverWait(driver, 10)
 
-    def open(self):
-        self._driver.get(self.__url)
+    def wait_page_is_present(self) -> None:
+        self._wait.until(EC.element_to_be_clickable(self.__employees_card_locator))
+
+    def get_relative_url(self) -> str:
+        return "/odoo/employees"
 
     def click(self):
         self._wait.until(EC.element_to_be_clickable(self.__employees_card_locator)).click()

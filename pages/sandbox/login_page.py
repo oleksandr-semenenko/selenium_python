@@ -10,7 +10,7 @@ from pages.sandbox.base_page import BasePage
 
 
 class LoginPage(BasePage):
-    __url = os.environ["FRONTEND_URL"] + "/web/login"
+
     __username_field = (By.ID, "login")
     __password_field = (By.ID, "password")
     __login_button = (By.XPATH, "//button[@class='btn btn-primary']")
@@ -23,11 +23,13 @@ class LoginPage(BasePage):
         super().__init__(driver)
         self._wait = WebDriverWait(driver, 10)
 
-    def open(self):
-        self._driver.get(self.__url)
+    def wait_page_is_present(self) -> None:
+        self._wait.until(EC.element_to_be_clickable(self.__login_button))
 
+    def get_relative_url(self) -> str:
+        return "/web/login"
 
-    def execute_login(self, username: str, password: str) -> None:
+    def execute_login(self, username: str, password: str) -> "None":
         # use BasePage helpers instead of direct find_element
         self._type(self.__username_field, username)
         self._type(self.__password_field, password)
