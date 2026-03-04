@@ -19,8 +19,6 @@ class TestPositiveScenarios:
         employees_page.open()
         employees_page.click()
 
-        # employee_profile_page = EmployeeProfilePage(driver, employee_id=6)
-
         job_title = generate_random_job_title()
 
         employee_profile_page.set_job_title(job_title)

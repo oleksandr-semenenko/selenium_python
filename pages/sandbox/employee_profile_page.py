@@ -50,6 +50,3 @@ class EmployeeProfilePage(BasePage):
             return element.is_displayed()
         except:
             return False
-
-    # def generate_random_job_title(self, prefix: str = "Consultant") -> str:
-    #     return "".join(random.choices(string.ascii_letters, k=10))

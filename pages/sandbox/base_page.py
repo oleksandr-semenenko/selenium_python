@@ -8,7 +8,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePage(ABC):
-    # _path: str
 
     def __init__(self, driver: WebDriver):
         self._driver = driver
@@ -22,6 +21,8 @@ class BasePage(ABC):
 
     def open(self) -> None:
         base_url = os.environ["FRONTEND_URL"]
+        if not base_url:
+            raise RuntimeError["FRONTEND_URL is not set"]
         full_url = f"{base_url}{self.get_relative_url()}"
         self._driver.get(full_url)
 
