@@ -9,7 +9,6 @@ from pages.sandbox.base_page import BasePage
 
 
 class EmployeeProfilePage(BasePage):
-    # _path = "/odoo/employees/6"
 
     __employee_name_locator = (By.XPATH, "//label[@for='work_email_0']")
     __employee_job_title_input = (By.ID, "job_title_0")

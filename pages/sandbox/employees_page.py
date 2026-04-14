@@ -16,6 +16,7 @@ class Employee:
 class EmployeesList(BasePage):
     __employees_card_locator = By.TAG_NAME, "article"
     __employee_name_locator = (By.XPATH, "//label[@for='work_email_0']")
+    __new_employee_button = (By.XPATH, "/html/body/div[1]/div/div[1]/div/div[1]/div[1]/div/button")
 
     def __init__(self, driver: WebDriver):
         super().__init__(driver)
@@ -43,3 +44,6 @@ class EmployeesList(BasePage):
             employees.append(Employee(name=name))
 
         return employees
+
+    def click_new_employee_button(self):
+        self._wait.until(EC.element_to_be_clickable(self.__new_employee_button)).click()
