@@ -45,3 +45,18 @@ class TestPositiveScenarios:
             "Toni Jimenez",
             "Walter Horton",
         ]
+
+
+    @pytest.mark.employee
+    @pytest.mark.positive
+    @pytest.mark.skip("Test under development")
+    def test_find_employees_by_name(self, driver):
+        login_page = LoginPage(driver)
+
+        employees_page = EmployeesList(driver)
+
+        login_page.open()
+        login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
+
+        employees_page.open()
+
