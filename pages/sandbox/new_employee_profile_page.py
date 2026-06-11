@@ -15,9 +15,9 @@ class NewEmployeeProfilePage(BasePage):
     __new_employee_job_title_input = (By.XPATH, "/html//input[@id='job_title_0']")
     __upload_employee_button = (By.XPATH, "//i[contains(@class, 'fa-cloud-upload')]")
 
-    def __init__(self, driver: WebDriver):
-        super().__init__(driver)
-        self._wait = WebDriverWait(driver, 10)
+    # def __init__(self, driver: WebDriver):
+    #     super().__init__(driver)
+    #     self._wait = WebDriverWait(driver, 10)
 
     def get_relative_url(self) -> str:
         return f'/odoo/employees/new'

@@ -15,9 +15,9 @@ class NewDepartmentProfilePage(BasePage):
     #__new_department_name_input = (By.ID, "name_0")
     __upload_department_button = (By.XPATH, "//i[contains(@class, 'fa-cloud-upload')]")
 
-    def __init__(self, driver: WebDriver):
-        super().__init__(driver)
-        self._wait = WebDriverWait(driver, 10)
+    # def __init__(self, driver: WebDriver):
+    #     super().__init__(driver)
+    #     self._wait = WebDriverWait(driver, 10)
 
     def get_relative_url(self) -> str:
         return f'/odoo/departments/new'

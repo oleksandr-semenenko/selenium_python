@@ -9,8 +9,7 @@ from pages.sandbox.login_page import LoginPage
 class TestPositiveScenarios:
     @pytest.mark.department
     @pytest.mark.positive
-    #@pytest.mark.skip("Test under development")
-    def test_get_list_employees(self, driver):
+    def test_get_list_departments(self, driver):
         login_page = LoginPage(driver)
 
         department_page = DepartmentList(driver)

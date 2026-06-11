@@ -8,6 +8,7 @@ from utils.data_factory import generate_random_job_title
 
 class TestPositiveScenarios:
     @pytest.mark.employee
+    @pytest.mark.order(1)
     @pytest.mark.positive
     def test_edit_profile_page(self, driver, signed_as_admin):
         employees_page = EmployeesList(driver)
