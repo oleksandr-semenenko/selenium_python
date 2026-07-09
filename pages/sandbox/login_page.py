@@ -18,9 +18,9 @@ class LoginPage(BasePage):
         "//p[@class='alert alert-danger']",
     )
 
-    def __init__(self, driver: WebDriver):
-        super().__init__(driver)
-        self._wait = WebDriverWait(driver, 10)
+    # def __init__(self, driver: WebDriver):
+    #     super().__init__(driver)
+    #     self._wait = WebDriverWait(driver, 10)
 
     def wait_page_is_present(self) -> None:
         self._wait.until(EC.element_to_be_clickable(self.__login_button))

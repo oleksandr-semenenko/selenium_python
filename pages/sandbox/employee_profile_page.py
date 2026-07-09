@@ -4,16 +4,19 @@ import string
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.sandbox.base_page import BasePage
 
 
 class EmployeeProfilePage(BasePage):
-    # _path = "/odoo/employees/6"
 
     __employee_name_locator = (By.XPATH, "//label[@for='work_email_0']")
     __employee_job_title_input = (By.ID, "job_title_0")
     __upload_button = (By.CSS_SELECTOR, "i.fa-cloud-upload")
+    __action_button = (By.CSS_SELECTOR, ".o_cp_action_menus button.o-dropdown.dropdown-toggle")
+    __delete_menu_item = (By.XPATH, "//span[contains(@class,'o-dropdown-item') and normalize-space()='Delete']")
+    __confirm_delete_button = (By.XPATH, "//footer[contains(@class,'modal-footer')]//button[normalize-space()='Delete']")
 
     def __init__(self, driver: WebDriver, employee_id: int):
         super().__init__(driver)
@@ -50,3 +53,12 @@ class EmployeeProfilePage(BasePage):
             return element.is_displayed()
         except:
             return False
+
+    def delete_employee(self) -> None:
+        self.wait_page_is_present()
+        self._click(self.__action_button)
+        self._wait.until(EC.element_to_be_clickable(self.__delete_menu_item)).click()
+        WebDriverWait(self._driver, 10).until(
+            EC.element_to_be_clickable(self.__confirm_delete_button)
+        ).click()
+        self._wait.until(EC.url_contains("/odoo/employees"))
