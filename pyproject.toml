@@ -28,11 +28,16 @@ files = ["src", "tests"]
 [tool.pytest.ini_options]
 # Папка з тестами
 testpaths = ["tests"]
+addopts = [
+    "--alluredir=allure-results",
+    "--clean-alluredir"
+]
 
 # Маркери для групування тестів
 markers = [
     "positive: позитивні сценарії",
     "negative: негативні сценарії",
+    "department: All department tests",
     "smoke: швидка перевірка основного функціоналу",
 ]
 
