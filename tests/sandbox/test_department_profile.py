@@ -13,10 +13,7 @@ from utils.data_factory import generate_random_department_name
 class TestPositiveScenarios:
     @pytest.mark.department
     @pytest.mark.positive
-    def test_get_department_profile(self, driver):
-        login_page = LoginPage(driver)
-        login_page.open()
-        login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
+    def test_get_department_profile(self, driver, signed_as_admin):
 
         department_page = DepartmentList(driver)
         department_page.open()
@@ -28,15 +25,18 @@ class TestPositiveScenarios:
         department_name = departments[0].name
         department_page.click_department_by_name(department_name)
 
-        assert department_name in driver.page_source, f"Department profile for {department_name} did not load"
+        department_id = DepartmentProfilePage.extract_department_id_from_current_url(driver)
+        department_profile_page = DepartmentProfilePage(driver, department_id=department_id)
+        department_profile_page.wait_page_is_present()
+
+        assert department_profile_page.get_department_name() == department_name, (
+            f"Department profile for {department_name} did not load"
+        )
 
 
     @pytest.mark.department
     @pytest.mark.positive
-    def test_create_department_profile(self, driver):
-        login_page = LoginPage(driver)
-        login_page.open()
-        login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
+    def test_create_department_profile(self, driver, signed_as_admin):
 
         department_page = DepartmentList(driver)
         department_page.open()
@@ -68,5 +68,51 @@ class TestPositiveScenarios:
                 )
 
 
+    @pytest.mark.department
+    @pytest.mark.positive
+    def test_edit_existing_department(self, driver, signed_as_admin):
 
+        department_page = DepartmentList(driver)
+        department_page.open()
+        department_page.wait_page_is_present()
 
+        departments = department_page.get_list_of_departments()
+        assert departments, "No departments found on the departments page"
+
+        original_name = departments[0].name
+        renamed_department_name = f"{original_name} Updated"
+
+        try:
+            department_page.click_department_by_name(original_name)
+            department_id = DepartmentProfilePage.extract_department_id_from_current_url(driver)
+            department_profile_page = DepartmentProfilePage(driver, department_id=department_id)
+            department_profile_page.wait_page_is_present()
+
+            department_profile_page.set_department_name(renamed_department_name)
+            department_profile_page.click_save()
+
+            department_page.open()
+            department_page.wait_page_is_present()
+            assert department_page.has_department_with_name(renamed_department_name), (
+                f"Department {renamed_department_name!r} was not updated in the department list"
+            )
+        finally:
+            department_page.open()
+            department_page.wait_page_is_present()
+
+            if department_page.has_department_with_name(renamed_department_name):
+                department_page.click_department_by_name(renamed_department_name)
+                department_id = DepartmentProfilePage.extract_department_id_from_current_url(driver)
+                department_profile_page = DepartmentProfilePage(driver, department_id=department_id)
+                department_profile_page.wait_page_is_present()
+                department_profile_page.set_department_name(original_name)
+                department_profile_page.click_save()
+
+            department_page.open()
+            department_page.wait_page_is_present()
+            assert department_page.has_department_with_name(original_name), (
+                f"Department {original_name!r} was not restored after the edit"
+            )
+            assert not department_page.has_department_with_name(renamed_department_name), (
+                f"Department {renamed_department_name!r} remains in the list after rollback"
+            )

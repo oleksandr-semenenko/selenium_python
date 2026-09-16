@@ -1,12 +1,9 @@
-import os
 import re
 
 import pytest
 
-from pages.sandbox import new_employee_profile_page, employee_profile_page
 from pages.sandbox.employee_profile_page import EmployeeProfilePage
 from pages.sandbox.employees_page import EmployeesList
-from pages.sandbox.login_page import LoginPage
 from pages.sandbox.new_employee_profile_page import NewEmployeeProfilePage
 from utils.data_factory import generate_random_name, generate_random_job_title
 
@@ -15,10 +12,7 @@ class TestPositiveScenarios:
     @pytest.mark.employee
     @pytest.mark.order(3)
     @pytest.mark.positive
-    def test_get_employee_profile(self, driver):
-        login_page = LoginPage(driver)
-        login_page.open()
-        login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
+    def test_get_employee_profile(self, driver, signed_as_admin):
 
         employees_page = EmployeesList(driver)
         employee_profile_page = EmployeeProfilePage(driver, employee_id=6)
@@ -30,14 +24,11 @@ class TestPositiveScenarios:
 
         assert employee_profile_page.is_employee_name_displayed()
 
-    # New test about create new employee profile
+
     @pytest.mark.employee
     @pytest.mark.order(4)
     @pytest.mark.positive
-    def test_create_employee_profile(self, driver):
-        login_page = LoginPage(driver)
-        login_page.open()
-        login_page.execute_login(os.environ["LOGIN"], os.environ["PASSWORD"])
+    def test_create_employee_profile(self, driver, signed_as_admin):
 
         employees_page = EmployeesList(driver)
         employees_page.open()
@@ -86,3 +77,4 @@ def _extract_employee_id_from_current_url(driver):
     if not match:
         raise ValueError(f"Employee id was not found in current url: {driver.current_url}")
     return int(match.group(1))
+
