@@ -17,6 +17,8 @@ class EmployeeProfilePage(BasePage):
     __action_button = (By.CSS_SELECTOR, ".o_cp_action_menus button.o-dropdown.dropdown-toggle")
     __delete_menu_item = (By.XPATH, "//span[contains(@class,'o-dropdown-item') and normalize-space()='Delete']")
     __confirm_delete_button = (By.XPATH, "//footer[contains(@class,'modal-footer')]//button[normalize-space()='Delete']")
+    __manager_field = (By.XPATH, "//input[@id='parent_id_0']")
+    __department_field = (By.XPATH, "//input[@id='department_id_0']")
 
     def __init__(self, driver: WebDriver, employee_id: int):
         super().__init__(driver)
@@ -54,6 +56,16 @@ class EmployeeProfilePage(BasePage):
         except:
             return False
 
+    def get_manager(self) -> str:
+        """Get the manager name from the employee profile."""
+        try:
+            manager_element = self._wait.until(
+                EC.visibility_of_element_located(self.__manager_field)
+            )
+            return manager_element.get_attribute("value").strip()
+        except Exception:
+            return ""
+
     def delete_employee(self) -> None:
         self.wait_page_is_present()
         self._click(self.__action_button)
@@ -62,3 +74,13 @@ class EmployeeProfilePage(BasePage):
             EC.element_to_be_clickable(self.__confirm_delete_button)
         ).click()
         self._wait.until(EC.url_contains("/odoo/employees"))
+
+    def get_department(self) -> str:
+        """Get the department name from the employee profile."""
+        try:
+            department_element = self._wait.until(
+                EC.visibility_of_element_located(self.__department_field)
+            )
+            return department_element.get_attribute("value").strip()
+        except Exception:
+            return ""
